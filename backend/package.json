@@ -1,0 +1,12 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.x",
+    "cors": "^2.x",
+    "express": "^4.x",
+    "jsonwebtoken": "^8.x",
+    "sqlite3": "^5.1.7"
+  }
+}
