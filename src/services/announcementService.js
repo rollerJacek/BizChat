@@ -1,18 +1,46 @@
 import axios from 'axios';
 import baseApiURL from '../utils/helpers';
 
-const API_URL = baseApiURL.url + '/api/announcements';
-
-const createAnnouncement = async (message) => {
-  const token = localStorage.getItem('token');
-  const response = await axios.post(API_URL, { message }, { headers: { Authorization: `Bearer ${token}` } });
-  return response.data;
-};
+// Mock data
+const mockAnnouncements = [
+  {
+    id: 1,
+    title: 'Nowa polityka pracy zdalnej',
+    content: 'Od przyszłego tygodnia wprowadzamy nowe zasady pracy zdalnej. Wszyscy pracownicy będą mogli pracować z domu 2 dni w tygodniu.',
+    author: 'HR',
+    created_at: '2024-01-15T09:00:00Z'
+  },
+  {
+    id: 2,
+    title: 'Aktualizacja systemu',
+    content: 'W weekend planowana jest aktualizacja systemu. Prosimy o zapisanie wszystkich ważnych danych.',
+    author: 'IT',
+    created_at: '2024-01-14T14:30:00Z'
+  },
+  {
+    id: 3,
+    title: 'Spotkanie zespołu',
+    content: 'W piątek o 10:00 odbędzie się spotkanie całego zespołu. Obecność obowiązkowa.',
+    author: 'Kierownik',
+    created_at: '2024-01-13T16:00:00Z'
+  }
+];
 
 const getAnnouncements = async () => {
-  const token = localStorage.getItem('token');
-  const response = await axios.get(API_URL, { headers: { Authorization: `Bearer ${token}` } });
-  return response.data;
+  // Mock API call - return mock data
+  return mockAnnouncements;
 };
 
-export default { createAnnouncement, getAnnouncements };
+const createAnnouncement = async (announcement) => {
+  // Mock API call - simulate creating announcement
+  const newAnnouncement = {
+    id: mockAnnouncements.length + 1,
+    ...announcement,
+    created_at: new Date().toISOString()
+  };
+  
+  mockAnnouncements.push(newAnnouncement);
+  return newAnnouncement;
+};
+
+export default { getAnnouncements, createAnnouncement };

@@ -18,12 +18,13 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="chat" element={<ChatPage />} />
         <Route path="login" element={<Login />} />
         <Route path="profile"
           element={
-            <ProtectedRoute>
+            // <ProtectedRoute>
               <Profile />
-            </ProtectedRoute>
+            // </ProtectedRoute>
           }
         />
         <Route path="admin" element={<AdminPanel />} />

@@ -1,28 +1,89 @@
 import axios from 'axios';
 import baseApiURL from '../utils/helpers';
 
-const API_URL = baseApiURL.url +'/api/tasks';
-
-const createTask = async (assigned_to, description, department_id) => {
-  const token = localStorage.getItem('token');
-  const response = await axios.post(API_URL, { assigned_to, description, department_id }, { headers: { Authorization: `Bearer ${token}` } });
-  return response.data;
-};
+// Mock data
+const mockTasks = [
+  {
+    id: 1,
+    title: 'Implementacja nowej funkcjonalności',
+    description: 'Dodanie nowego modułu do systemu zarządzania zadaniami',
+    status: 'W trakcie',
+    priority: 'Wysoki',
+    assignee_id: 1,
+    assignee_name: 'admin',
+    due_date: '2024-01-25T00:00:00Z',
+    created_at: '2024-01-10T09:00:00Z'
+  },
+  {
+    id: 2,
+    title: 'Testowanie aplikacji',
+    description: 'Przeprowadzenie testów jednostkowych i integracyjnych',
+    status: 'Do zrobienia',
+    priority: 'Średni',
+    assignee_id: 2,
+    assignee_name: 'kierownik1',
+    due_date: '2024-01-30T00:00:00Z',
+    created_at: '2024-01-12T14:00:00Z'
+  },
+  {
+    id: 3,
+    title: 'Dokumentacja API',
+    description: 'Przygotowanie dokumentacji technicznej dla API',
+    status: 'Zakończone',
+    priority: 'Niski',
+    assignee_id: 3,
+    assignee_name: 'pracownik1',
+    due_date: '2024-01-20T00:00:00Z',
+    created_at: '2024-01-08T11:00:00Z'
+  },
+  {
+    id: 4,
+    title: 'Optymalizacja bazy danych',
+    description: 'Przeprowadzenie optymalizacji zapytań SQL',
+    status: 'W trakcie',
+    priority: 'Wysoki',
+    assignee_id: 4,
+    assignee_name: 'sekretariat1',
+    due_date: '2024-01-28T00:00:00Z',
+    created_at: '2024-01-14T16:00:00Z'
+  }
+];
 
 const getTasks = async () => {
-  const token = localStorage.getItem('token');
-  const response = await axios.get(API_URL, { headers: { Authorization: `Bearer ${token}` } });
-  return response.data;
+  // Mock API call - return mock data
+  return mockTasks;
 };
 
-const updateTaskStatus = async (taskId, status) => {
-  const token = localStorage.getItem('token');
-  await axios.put(`${API_URL}/status`, { taskId, status }, { headers: { Authorization: `Bearer ${token}` } });
+const createTask = async (task) => {
+  // Mock API call - simulate creating task
+  const newTask = {
+    id: mockTasks.length + 1,
+    ...task,
+    created_at: new Date().toISOString()
+  };
+  
+  mockTasks.push(newTask);
+  return newTask;
 };
 
-const addTaskComment = async (taskId, comment) => {
-  const token = localStorage.getItem('token');
-  await axios.put(`${API_URL}/comment`, { taskId, comment }, { headers: { Authorization: `Bearer ${token}` } });
+const updateTask = async (id, updates) => {
+  // Mock API call - simulate updating task
+  const taskIndex = mockTasks.findIndex(task => task.id === id);
+  if (taskIndex !== -1) {
+    mockTasks[taskIndex] = { ...mockTasks[taskIndex], ...updates };
+    return mockTasks[taskIndex];
+  }
+  throw new Error('Task not found');
 };
 
-export default { createTask, getTasks, updateTaskStatus, addTaskComment };
+const deleteTask = async (id) => {
+  // Mock API call - simulate deleting task
+  const taskIndex = mockTasks.findIndex(task => task.id === id);
+  if (taskIndex !== -1) {
+    const deletedTask = mockTasks.splice(taskIndex, 1)[0];
+    return deletedTask;
+  }
+  throw new Error('Task not found');
+};
+
+export default { getTasks, createTask, updateTask, deleteTask };

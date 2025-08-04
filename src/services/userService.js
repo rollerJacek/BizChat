@@ -1,12 +1,53 @@
 import axios from 'axios';
 import baseApiURL from '../utils/helpers';
 
-const API_URL = baseApiURL.url + '/api/users';
+// Mock data
+const mockUsers = [
+  {
+    id: 1,
+    username: 'admin',
+    role: 'admin',
+    department_id: 1,
+    department_name: 'IT',
+    email: 'admin@bizchat.pl'
+  },
+  {
+    id: 2,
+    username: 'kierownik1',
+    role: 'kierownik',
+    department_id: 2,
+    department_name: 'HR',
+    email: 'kierownik@bizchat.pl'
+  },
+  {
+    id: 3,
+    username: 'pracownik1',
+    role: 'pracownik',
+    department_id: 1,
+    department_name: 'IT',
+    email: 'pracownik@bizchat.pl'
+  },
+  {
+    id: 4,
+    username: 'sekretariat1',
+    role: 'sekretariat',
+    department_id: 3,
+    department_name: 'Administracja',
+    email: 'sekretariat@bizchat.pl'
+  },
+  {
+    id: 5,
+    username: 'pracownik2',
+    role: 'pracownik',
+    department_id: 2,
+    department_name: 'HR',
+    email: 'pracownik2@bizchat.pl'
+  }
+];
 
 const getAllUsers = async () => {
-  const token = localStorage.getItem('token');
-  const response = await axios.get(API_URL, { headers: { Authorization: `Bearer ${token}` } });
-  return response.data;
+  // Mock API call - return mock data
+  return mockUsers;
 };
 
 export default { getAllUsers };
