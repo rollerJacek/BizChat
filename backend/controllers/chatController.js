@@ -12,7 +12,6 @@ exports.getMessages = async (req, res) => {
     if (err) {
       return res.status(500).json({ error: err.message });
     }
-    console.log(rows)
     res.json(rows);
   });
 };

@@ -21,19 +21,40 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Logowanie</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Nazwa użytkownika:</label>
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required/>
+    <div className="login-page">
+      <div className="login-container">
+        <div className="login-promo-panel">
+          <div className="promo-content">
+            <i className="fas fa-network-wired"></i>
+            <h1>BizChat</h1>
+            <p>Twoje centrum zarządzania i komunikacji w jednym miejscu.</p>
+          </div>
         </div>
-        <div>
-          <label>Hasło:</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+        <div className="login-form-panel">
+          <div className="form-content">
+            <form className="login-form-panel" onSubmit={handleSubmit}>
+              <div className="login-form-group">
+                <label for="username" >Nazwa użytkownika:</label>
+                <input type="text" id="username" name="username" value={username} onChange={(e) => setUsername(e.target.value)} required />
+
+              </div>
+              <div className="login-form-group">
+                <label for="password" >Hasło:</label>
+                <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+              </div>
+              <button type="submit" className="login-button" >Zaloguj</button>
+            </form>
+          </div>
         </div>
-        <button type="submit">Zaloguj</button>
-      </form>
+        <div className="login-actions-corner">
+          <a href="manual.html" className="login-action-btn" title="Instrukcja obsługi">
+            <i className="fas fa-question-circle"></i>
+          </a>
+          <button id="theme-toggle-btn" className="login-action-btn" title="Zmień motyw">
+            <i className="fas fa-sun"></i>
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
