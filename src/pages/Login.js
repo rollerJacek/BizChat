@@ -14,6 +14,7 @@ const Login = () => {
       const response = await authService.login(username, password);
       localStorage.setItem('token', response.token);
       localStorage.setItem("role", response.user.role);
+      localStorage.setItem("working-timer", Date.now());
       navigate('/');
     } catch (err) {
       alert('Login failed ' + err);
