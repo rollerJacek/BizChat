@@ -85,6 +85,42 @@ db.serialize(() => {
         console.log("Konto admina już istnieje.");
       }
     });
+
+        // Dodanie domyślnego konta admina, jeśli nie istnieje
+    db.get("SELECT * FROM users WHERE username = ?", ['Jan Kowalski'], (err, row) => {
+      if (err) {
+        console.error("Błąd przy sprawdzaniu konta Jan Kowalski:", err);
+      } else if (!row) {
+        // W środowisku produkcyjnym pamiętaj o hashowaniu hasła!
+        db.run("INSERT INTO users (username, password, role) VALUES (?, ?, ?)", ['Jan Kowalski', 'admin', 'admin'], function(err) {
+          if (err) {
+            console.error("Błąd przy dodawaniu konta Jan Kowalski:", err);
+          } else {
+            console.log("Defaultowe konto Jan Kowalski zostało utworzone.");
+          }
+        });
+      } else {
+        console.log("Konto Jan Kowalski już istnieje.");
+      }
+    });
+
+        // Dodanie domyślnego konta admina, jeśli nie istnieje
+    db.get("SELECT * FROM users WHERE username = ?", ['Marta Nowak'], (err, row) => {
+      if (err) {
+        console.error("Błąd przy sprawdzaniu konta Marta Nowak:", err);
+      } else if (!row) {
+        // W środowisku produkcyjnym pamiętaj o hashowaniu hasła!
+        db.run("INSERT INTO users (username, password, role) VALUES (?, ?, ?)", ['Marta Nowak', 'admin', 'admin'], function(err) {
+          if (err) {
+            console.error("Błąd przy dodawaniu konta Marta Nowak:", err);
+          } else {
+            console.log("Defaultowe konto Marta Nowak zostało utworzone.");
+          }
+        });
+      } else {
+        console.log("Konto Marta Nowak już istnieje.");
+      }
+    });
 });
 
 module.exports = db;
